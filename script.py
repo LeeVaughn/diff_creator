@@ -13,12 +13,14 @@ text_files = sorted(text_files)
 
 
 def get_diff(truth, text):
-    print(truth, text)
-    diff_out = check_output(['diffchecker', f'truth/{truth}', f'text/{text}'])
-    diff_out = diff_out.decode('utf-8')
-    diff_out = diff_out.split(': ')
-    diff_out = diff_out[1].strip()
-    return diff_out
+    # checks to make sure both files are text files
+    if truth.endswith('.txt') and text.endswith('.txt'):
+        print(truth, text)
+        diff_out = check_output(['diffchecker', f'truth/{truth}', f'text/{text}'])
+        diff_out = diff_out.decode('utf-8')
+        diff_out = diff_out.split(': ')
+        diff_out = diff_out[1].strip()
+        return diff_out
 
 
 def write_csv(results):
